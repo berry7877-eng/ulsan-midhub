@@ -18,10 +18,13 @@ export default function Benefits() {
     <div className="min-h-screen bg-gray-50 font-sans">
       <header className="bg-emerald-600 text-white px-4 py-5">
         <div className="max-w-2xl mx-auto">
-          <Link href="/" className="text-sm text-emerald-100 hover:text-white">
-            ← 홈으로
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-lg font-extrabold text-emerald-700 shadow-md hover:bg-emerald-50 transition-colors"
+          >
+            🏠 홈으로
           </Link>
-          <h1 className="mt-2 text-2xl font-extrabold">🎁 받을 수 있는 혜택</h1>
+          <h1 className="mt-4 text-2xl font-extrabold">🎁 받을 수 있는 혜택</h1>
           <p className="mt-1 text-sm text-emerald-100">
             울산 실업자·중장년을 위한 정책 · 지원금 · 교육을 AI로 내게 맞게 확인하세요
           </p>

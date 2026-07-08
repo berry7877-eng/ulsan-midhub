@@ -82,9 +82,7 @@ export default function Home() {
 
           {/* 3. 혜택 */}
           <a
-            href={MOIM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/benefits"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-green-700 hover:brightness-110 transition"
           >
             <span className="text-5xl">🎁</span>

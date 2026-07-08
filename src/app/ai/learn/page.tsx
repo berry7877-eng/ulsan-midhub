@@ -62,7 +62,7 @@ export default function LearnPage() {
             href="/ai"
             className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-lg font-extrabold text-indigo-700 shadow-md hover:bg-indigo-50 transition-colors"
           >
-            ← AI 진단으로
+            ← AI 홈
           </Link>
           <h1 className="mt-4 text-2xl font-extrabold">📚 AI 기본지식 배우기</h1>
           <p className="mt-1 text-sm text-indigo-100">
@@ -174,7 +174,7 @@ AI를 배우는 이유는 업무를 줄이고 싶어서입니다.
               🤝 무료 AI 모임 참여하기 →
             </a>
             <Link
-              href="/ai"
+              href="/ai/diagnosis"
               className="flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 hover:bg-indigo-50"
             >
               📝 내 AI 수준 진단해보기 →

@@ -75,7 +75,7 @@ export default function CurriculumPage() {
             href="/ai"
             className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-lg font-extrabold text-indigo-700 shadow-md hover:bg-indigo-50 transition-colors"
           >
-            ← AI 진단으로
+            ← AI 홈
           </Link>
           <h1 className="mt-4 text-2xl font-extrabold">📋 AI 수업 커리큘럼</h1>
           <p className="mt-1 text-sm text-indigo-100">
@@ -154,7 +154,7 @@ export default function CurriculumPage() {
             ))}
           </div>
           <Link
-            href="/ai"
+            href="/ai/diagnosis"
             className="mt-3 inline-block text-sm font-bold text-indigo-700 underline"
           >
             → 내 레벨 진단해보기
@@ -213,7 +213,7 @@ export default function CurriculumPage() {
               🤝 무료 AI 모임 참여하기 →
             </a>
             <Link
-              href="/ai"
+              href="/ai/diagnosis"
               className="flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 hover:bg-indigo-50"
             >
               📝 내 AI 수준 진단하기 →

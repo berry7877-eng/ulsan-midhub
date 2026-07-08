@@ -1,11 +1,13 @@
 import Link from "next/link";
-import AiDiagnostic from "./AiDiagnostic";
 
 export const metadata = {
   title: "AI로 날개달기 — 울산 미드허브",
   description:
-    "AI 이해도 진단(20문항)으로 내 수준을 확인하고, 중장년을 위한 AI 기본지식을 배웁니다.",
+    "중장년을 위한 AI 허브. 이해도 진단, 수업 커리큘럼, 기본지식 학습, 무료 AI 모임.",
 };
+
+const MOIM_URL =
+  "https://daangn.com/kr/share/community/ref/invite-group/bbSzlfihyYu";
 
 export default function AiPage() {
   return (
@@ -26,37 +28,65 @@ export default function AiPage() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6">
-        {/* 진단 안내 */}
-        <section className="rounded-3xl bg-white border border-gray-200 p-6">
-          <span className="inline-block rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700">
-            📝 AI 이해도 진단
-          </span>
-          <h2 className="mt-3 text-xl font-extrabold text-gray-900">
-            내 AI 수준부터 확인해봐요
-          </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-gray-600">
-            총 <b>20문항</b>, 정답이 없는 검사예요. 지금의 나를 솔직하게 고르면
-            됩니다 (5~10분). 끝나면 <b>내 레벨과 다음 학습 단계</b>를 알려드려요.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href="/ai/learn"
-              className="rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-indigo-700"
-            >
-              📚 기본지식 배우기
-            </Link>
-            <Link
-              href="/ai/curriculum"
-              className="rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 hover:bg-indigo-50"
-            >
-              📋 수업 커리큘럼 보기
-            </Link>
-          </div>
-        </section>
+        {/* 4분할 타일 */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* 1. AI 이해도 진단 */}
+          <Link
+            href="/ai/diagnosis"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
+          >
+            <span className="text-5xl">📝</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
+              AI 이해도 진단
+            </h2>
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-violet-100">
+              20문항으로 내 수준 확인 →
+            </p>
+          </Link>
 
-        {/* 진단 문항 */}
-        <div className="mt-6">
-          <AiDiagnostic />
+          {/* 2. 수업 커리큘럼 */}
+          <Link
+            href="/ai/curriculum"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-sky-500 to-blue-700 hover:brightness-110 transition"
+          >
+            <span className="text-5xl">📋</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
+              수업 커리큘럼
+            </h2>
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-sky-100">
+              5일 과정·직업별 프로젝트 →
+            </p>
+          </Link>
+
+          {/* 3. 기본지식 배우기 */}
+          <Link
+            href="/ai/learn"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-teal-700 hover:brightness-110 transition"
+          >
+            <span className="text-5xl">📚</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
+              기본지식 배우기
+            </h2>
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
+              AI 첫걸음, 쉽게 정리 →
+            </p>
+          </Link>
+
+          {/* 4. 무료 AI 모임 */}
+          <a
+            href={MOIM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-red-500 hover:brightness-110 transition"
+          >
+            <span className="text-5xl">🤝</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
+              무료 AI 모임
+            </h2>
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
+              같은 나이대끼리 함께 →
+            </p>
+          </a>
         </div>
       </main>
     </div>

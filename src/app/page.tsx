@@ -48,63 +48,61 @@ export default function Home() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6">
-        {/* 4분할 타일: AI · 수다 · 정책교육 · 구인공고 */}
+        {/* 4분할 타일: AI로 날개달기 · 두번째 인생 · 혜택 · 취업 */}
         <div className="grid grid-cols-2 gap-4">
-          {/* 1. AI */}
+          {/* 1. AI로 날개달기 */}
           <a
             href={MOIM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">🤖</span>
-            <h2 className="mt-auto text-3xl font-extrabold tracking-tight">AI</h2>
+            <span className="text-5xl font-black tracking-tight">AI</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">AI로 날개달기</h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-violet-100">
-              중장년에겐 위협이 아니라 무기.
-              무료 AI 모임에서 배워요 →
+              경험에 AI를 더해 날아오르기 →
             </p>
           </a>
 
-          {/* 2. 수다 & 사주운세 */}
+          {/* 2. 두번째 인생 즐기기 */}
           <a
             href={MOIM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-red-500 hover:brightness-110 transition"
           >
-            <span className="text-5xl">💬</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">수다·사주운세</h2>
+            <span className="text-5xl">🎉</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
+              두번째 인생 즐기기
+            </h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
-              취업 얘기, 사는 얘기, 재미로 보는 운세.
-              편하게 어울려요 →
+              수다 · 운세로 활력 충전 →
             </p>
           </a>
 
-          {/* 3. 정책 · 교육 */}
+          {/* 3. 혜택 */}
           <a
             href={MOIM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-green-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">🎓</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">정책·교육</h2>
+            <span className="text-5xl">🎁</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">혜택</h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
-              내일배움카드·중장년센터·폴리텍.
-              몰라서 못 받는 지원 →
+              정책 · 교육 지원정보 →
             </p>
           </a>
 
-          {/* 4. 구인 공고 */}
+          {/* 4. 취업 */}
           <a
             href="/jobs"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-sky-500 to-blue-700 hover:brightness-110 transition"
           >
             <span className="text-5xl">💼</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">구인 공고</h2>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">취업</h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-sky-50">
-              울산 7개+ 기관 공고·담당자 폰연결.
-              바로 확인하기 →
+              워크넷 · 울산일자리 →
             </p>
           </a>
         </div>

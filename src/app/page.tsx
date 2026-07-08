@@ -1,3 +1,6 @@
+// 당근 모임 초대 링크
+const MOIM_URL = "https://daangn.com/kr/share/community/ref/invite-group/bbSzlfihyYu";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -35,31 +38,59 @@ export default function Home() {
               { icon: "📋", title: "정보 집약 대시보드", desc: "울산 7개+ 기관 공고 실시간 수집" },
               { icon: "📞", title: "폰연결", desc: "공고 담당자에게 바로 전화 연결" },
               { icon: "🎓", title: "교육 통합 신청", desc: "폴리텍·직업훈련원 원스톱 신청" },
-              { icon: "🤝", title: "중장년 커뮤니티", desc: "취업 경험 공유, 정보 제보" },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white rounded-xl border border-gray-200 p-4"
-              >
-                <span className="text-2xl">{item.icon}</span>
-                <h4 className="mt-2 text-sm font-semibold text-gray-800">{item.title}</h4>
-                <p className="mt-0.5 text-xs text-gray-500">{item.desc}</p>
-              </div>
-            ))}
+              { icon: "🤝", title: "중장년 커뮤니티", desc: "당근 모임에서 만나요", href: MOIM_URL },
+            ].map((item) =>
+              item.href ? (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white rounded-xl border border-orange-200 p-4 block hover:border-orange-400 hover:shadow-sm transition-colors"
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <h4 className="mt-2 text-sm font-semibold text-gray-800">{item.title}</h4>
+                  <p className="mt-0.5 text-xs text-orange-600 font-medium">{item.desc} →</p>
+                </a>
+              ) : (
+                <div
+                  key={item.title}
+                  className="bg-white rounded-xl border border-gray-200 p-4"
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <h4 className="mt-2 text-sm font-semibold text-gray-800">{item.title}</h4>
+                  <p className="mt-0.5 text-xs text-gray-500">{item.desc}</p>
+                </div>
+              )
+            )}
           </div>
         </section>
 
-        <section className="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4">
-          <p className="text-sm font-semibold text-amber-800">서비스 준비 중</p>
-          <p className="mt-1 text-xs text-amber-700 leading-relaxed">
-            현재 울산 미드허브는 초기 구축 단계입니다.
-            구인 공고 폰연결 기능을 먼저 제공합니다.
+        <section className="bg-orange-50 border border-orange-200 rounded-2xl px-6 py-6">
+          <span className="inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+            🤝 당근 모임
+          </span>
+          <h3 className="mt-3 text-lg font-bold text-gray-900 leading-snug">
+            울산 중장년에게<br />꼭 필요한 정보를 나눠요
+          </h3>
+          <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+            <span className="font-semibold text-gray-800">AI교육 · 취업 · 생활편의</span> 정보를
+            같은 나이대끼리 나누는 모임입니다.
+            어렵지 않아요. 부담 없이 편하게 들러보세요.
           </p>
           <a
-            href="/jobs"
-            className="mt-3 inline-block text-xs font-semibold text-amber-700 underline"
+            href={MOIM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-block rounded-lg bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 transition-colors"
           >
-            공고 목록 확인하기
+            당근 모임 참여하기 →
+          </a>
+          <a
+            href="/jobs"
+            className="mt-3 block text-xs font-semibold text-gray-500 underline"
+          >
+            먼저 구인 공고부터 볼게요
           </a>
         </section>
       </main>

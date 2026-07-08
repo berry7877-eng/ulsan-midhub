@@ -22,7 +22,8 @@ const GUKCHWI =
   "http://210.95.199.70/ulsan/ctrIntro/ctrWork/ctrWorkDetail.do?detCode=1&menuCd=40220&subMenuCd=40520";
 const CENTER = "http://210.95.199.70/ulsan/main.do";
 const ULSAN_JOB = "https://www.ulsan.go.kr/u/economy/contents.ulsan?mId=001002003000000000";
-const ELIFE = "https://www.elifeplan.or.kr/course/course_view.jsp?id=63";
+const POLYTECH = "https://www.kopo.ac.kr/ulsan/index.do";
+const ELIFE_HOME = "https://www.elifeplan.or.kr/";
 const HRD = "https://www.hrd.go.kr";
 
 const BENEFITS: Benefit[] = [
@@ -101,21 +102,32 @@ const BENEFITS: Benefit[] = [
     elig: () => "maybe",
   },
   {
+    id: "polytech",
+    icon: "🛠️",
+    title: "폴리텍 울산캠퍼스",
+    tag: "국가기술자격 취득에 유리",
+    desc: "실습 중심 국비 기능·기술 교육으로 자격증 취득과 취업 연계에 강합니다. IT·기계·전기 등 실무 과정을 무료·저비용으로 배울 수 있어요.",
+    track: "learn",
+    link: { label: "폴리텍 울산캠퍼스 홈페이지", url: POLYTECH },
+    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
+  },
+  {
+    id: "elife",
+    icon: "📚",
+    title: "울산인재평생교육진흥원",
+    tag: "저렴·무료 · 폭넓은 강좌",
+    desc: "다양한 분야의 평생학습 강좌를 저렴하거나 무료로 제공합니다. 온·오프라인을 함께 운영하고 생활밀착형 과정이 많아 부담 없이 새로 배우기 좋아요.",
+    track: "learn",
+    link: { label: "평생교육진흥원 홈페이지", url: ELIFE_HOME },
+    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
+  },
+  {
     id: "mid-center-edu",
     icon: "💻",
     title: "울산중장년내일센터 프로그램",
     desc: "재취업·전직 온라인 과정. 경력 분석, 구직전략, 이력서·면접, 스트레스·변화관리 등을 다룹니다.",
     track: "learn",
     link: { label: "고용복지+센터 안내", url: CENTER },
-    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
-  },
-  {
-    id: "polytech",
-    icon: "🛠️",
-    title: "평생교육진흥원 · 폴리텍 울산캠퍼스",
-    desc: "IT·디지털 역량·기술 기능 교육 등 실무 중심 강좌를 비교적 저렴하거나 무료로 들을 수 있어요.",
-    track: "learn",
-    link: { label: "평생교육 강좌 보기", url: ELIFE },
     elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
   },
   {

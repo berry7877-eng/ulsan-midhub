@@ -52,9 +52,7 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-4">
           {/* 1. AI로 날개달기 */}
           <a
-            href={MOIM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/ai"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
           >
             <span className="text-5xl font-black tracking-tight">AI</span>

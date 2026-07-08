@@ -16,24 +16,22 @@ type Benefit = {
   elig: (a: Answers) => Status;
 };
 
-const WORKNET =
-  "https://www.work.go.kr/ulsan/ctrIntro/ctrWork/ctrWorkDetail.do?detCode=1&menuCd=40220&subMenuCd=40207";
-const GUKCHWI =
-  "http://210.95.199.70/ulsan/ctrIntro/ctrWork/ctrWorkDetail.do?detCode=1&menuCd=40220&subMenuCd=40520";
-const CENTER = "http://210.95.199.70/ulsan/main.do";
-const ULSAN_JOB = "https://www.ulsan.go.kr/u/economy/contents.ulsan?mId=001002003000000000";
-const POLYTECH = "https://www.kopo.ac.kr/ulsan/index.do";
-const ELIFE_HOME = "https://www.elifeplan.or.kr/";
+// 검증된 공식 링크만 사용
+const WORK24 = "https://www.work24.go.kr/";
+const KUA = "https://www.kua.go.kr/";
 const HRD = "https://www.hrd.go.kr";
+const POLYTECH = "https://www.kopo.ac.kr/ulsan/index.do";
+const ELIFE = "https://www.elifeplan.or.kr/";
 
 const BENEFITS: Benefit[] = [
+  // ── 재취업 · 생계 중심 ──
   {
     id: "unemployment",
     icon: "💵",
     title: "실업급여 (구직급여)",
-    desc: "고용보험 가입 이력이 있는 실업자에게 지급됩니다. 신청·수급은 고용센터(워크넷)에서 진행해요.",
+    desc: "고용보험 가입 이력이 있는 실업자에게 지급됩니다. 신청·수급은 고용24(워크넷)에서 진행해요.",
     track: "job",
-    link: { label: "워크넷에서 신청하기", url: WORKNET },
+    link: { label: "고용24에서 신청", url: WORK24 },
     elig: (a) => (a.insured === "yes" ? "yes" : "no"),
   },
   {
@@ -43,64 +41,21 @@ const BENEFITS: Benefit[] = [
     tag: "구직촉진수당(생계지원)",
     desc: "저소득·취업취약 계층에 취업지원서비스와 구직촉진수당을 함께 줍니다. Ⅰ·Ⅱ유형별 소득·재산 기준을 확인하세요.",
     track: "job",
-    link: { label: "국민취업지원제도 안내", url: GUKCHWI },
+    link: { label: "국민취업지원제도 안내", url: KUA },
     elig: (a) => (a.goal === "income" ? "yes" : "maybe"),
   },
   {
-    id: "public",
-    icon: "🧹",
-    title: "공공근로 · 자활 · 지역 일자리",
-    desc: "울산시 계절형·상시형 공공근로와 자활공공근로로 한시적 일자리를 제공합니다. 구·군별 모집 시기를 확인하세요.",
+    id: "card",
+    icon: "💳",
+    title: "내일배움카드 (국비훈련)",
+    tag: "훈련비 지원",
+    desc: "훈련비를 지원받아 교육 비용 부담을 크게 줄일 수 있어요. 재취업 준비와 자격증 취득에 함께 쓰기 좋습니다.",
     track: "job",
-    link: { label: "울산시 일자리 포털", url: ULSAN_JOB },
-    elig: () => "maybe",
+    link: { label: "HRD-Net에서 확인", url: HRD },
+    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
   },
-  {
-    id: "mid-subsidy",
-    icon: "💰",
-    title: "중장년 취업지원 사업",
-    tag: "기업에 월 60만 원 · 최대 6개월",
-    desc: "울산 중소기업이 만 40~64세 미취업자를 정규직으로 채용하면 기업에 1인당 월 60만 원씩 최대 6개월 지원됩니다.",
-    track: "job",
-    link: { label: "울산시 일자리 포털", url: ULSAN_JOB },
-    elig: (a) => (a.age === "40_64" ? "yes" : "no"),
-  },
-  {
-    id: "restart",
-    icon: "🧭",
-    title: "중장년 새출발 지원센터",
-    desc: "직업상담, 재취업 교육, 심리 치유, 금융·노후설계 상담을 한 곳에서 받을 수 있어요.",
-    track: "job",
-    link: { label: "고용복지+센터 안내", url: CENTER },
-    elig: (a) => (a.age === "u40" ? "maybe" : "yes"),
-  },
-  {
-    id: "senior-career",
-    icon: "🏛️",
-    title: "신중년 경력활용 일자리",
-    desc: "50세 이상 퇴직자·경력단절 인력이 공공기관·사회적기업·비영리단체에서 경력을 살려 일하는 사업입니다.",
-    track: "job",
-    link: { label: "울산시 일자리 포털", url: ULSAN_JOB },
-    elig: (a) => (a.age === "u40" ? "no" : "maybe"),
-  },
-  {
-    id: "matching",
-    icon: "📝",
-    title: "맞춤형 취업 연계 서비스",
-    desc: "이력서·자기소개서 코칭, 면접 준비, 직무역량 진단, 기업 매칭 같은 실무형 지원이 제공됩니다.",
-    track: "job",
-    link: { label: "고용복지+센터 안내", url: CENTER },
-    elig: (a) => (a.goal === "rehire" ? "yes" : "maybe"),
-  },
-  {
-    id: "care",
-    icon: "💚",
-    title: "심리 · 노후 지원",
-    desc: "은퇴 후 불안감과 사회적 고립을 줄이는 상담, 노후 재무설계, 건강관리 연계 프로그램이 있어요.",
-    track: "job",
-    link: { label: "고용복지+센터 안내", url: CENTER },
-    elig: () => "maybe",
-  },
+
+  // ── 배움 중심 ──
   {
     id: "polytech",
     icon: "🛠️",
@@ -118,25 +73,7 @@ const BENEFITS: Benefit[] = [
     tag: "저렴·무료 · 폭넓은 강좌",
     desc: "다양한 분야의 평생학습 강좌를 저렴하거나 무료로 제공합니다. 온·오프라인을 함께 운영하고 생활밀착형 과정이 많아 부담 없이 새로 배우기 좋아요.",
     track: "learn",
-    link: { label: "평생교육진흥원 홈페이지", url: ELIFE_HOME },
-    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
-  },
-  {
-    id: "mid-center-edu",
-    icon: "💻",
-    title: "울산중장년내일센터 프로그램",
-    desc: "재취업·전직 온라인 과정. 경력 분석, 구직전략, 이력서·면접, 스트레스·변화관리 등을 다룹니다.",
-    track: "learn",
-    link: { label: "고용복지+센터 안내", url: CENTER },
-    elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
-  },
-  {
-    id: "card",
-    icon: "💳",
-    title: "내일배움카드 (국비훈련)",
-    desc: "훈련비를 지원받아 교육 비용 부담을 크게 줄일 수 있어요.",
-    track: "learn",
-    link: { label: "HRD-Net에서 확인", url: HRD },
+    link: { label: "평생교육진흥원 홈페이지", url: ELIFE },
     elig: (a) => (a.goal === "learn" ? "yes" : "maybe"),
   },
 ];

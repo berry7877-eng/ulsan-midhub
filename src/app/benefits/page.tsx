@@ -7,31 +7,10 @@ export const metadata = {
     "울산 실업자·중장년이 받을 수 있는 실업급여·국민취업지원·재취업/생계지원과 교육 과정을, AI 진단으로 내게 맞게 확인하세요.",
 };
 
-const channels = [
-  {
-    icon: "🏢",
-    title: "가까운 고용복지+센터 (고용센터)",
-    desc: "실업급여·구직지원 서비스 신청·문의는 여기서. 방문 또는 워크넷 이용.",
-    url: "https://www.work.go.kr/ulsan/ctrIntro/ctrWork/ctrWorkDetail.do?detCode=1&menuCd=40220&subMenuCd=40207",
-  },
-  {
-    icon: "🧾",
-    title: "울산 고용복지센터 안내",
-    desc: "국민취업지원제도 등 취업지원 서비스 정보를 확인할 수 있어요.",
-    url: "http://210.95.199.70/ulsan/main.do",
-  },
-  {
-    icon: "🏙️",
-    title: "울산시 일자리 포털",
-    desc: "지역별 정책·공모·지원사업과 공공근로 공고를 주기적으로 확인하세요.",
-    url: "https://www.ulsan.go.kr/u/economy/contents.ulsan?mId=001002003000000000",
-  },
-];
-
 const steps = [
-  { badge: "재취업이 목표라면", desc: "중장년내일센터 상담부터 받기" },
-  { badge: "채용 연계가 필요하면", desc: "울산시 일자리 포털·경제일자리진흥원 공고 확인하기" },
-  { badge: "직무를 바꾸고 싶다면", desc: "폴리텍·평생교육기관 재훈련 과정 찾기" },
+  { badge: "재취업이 목표라면", desc: "고용24(워크넷)에서 구직 등록하고 실업급여 확인하기" },
+  { badge: "생계지원이 필요하면", desc: "국민취업지원제도 자격·구직촉진수당 알아보기" },
+  { badge: "배우고 자격증 따려면", desc: "폴리텍·평생교육진흥원 과정과 내일배움카드 활용하기" },
 ];
 
 export default function Benefits() {
@@ -51,34 +30,6 @@ export default function Benefits() {
 
       <main className="max-w-2xl mx-auto px-4 py-6 pb-12">
         <BenefitsExplorer />
-
-        {/* 신청 · 확인 경로 */}
-        <section className="mt-9">
-          <h2 className="text-xl font-extrabold text-gray-900 mb-3">📞 신청 · 확인 경로</h2>
-          <div className="space-y-3">
-            {channels.map((c) => (
-              <a
-                key={c.title}
-                href={c.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-white rounded-2xl border border-gray-200 p-5 hover:border-emerald-400 hover:shadow-sm transition"
-              >
-                <div className="flex items-start gap-3">
-                  <span className="text-3xl leading-none">{c.icon}</span>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900">
-                      {c.title} <span className="text-emerald-600">→</span>
-                    </h3>
-                    <p className="mt-1.5 text-[15px] leading-relaxed text-gray-600">
-                      {c.desc}
-                    </p>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </section>
 
         {/* 추천 순서 */}
         <section className="mt-9">

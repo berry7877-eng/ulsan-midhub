@@ -1,5 +1,11 @@
 import PhoneConnect from "@/components/PhoneConnect";
 
+// 울산경제일자리진흥원 실시간 채용 게시판
+const PUBLIC_JOBS =
+  "https://job.ubpi.or.kr/job/recruit/publicRecruit/list.ulsan?mId=001001002001000000";
+const CIVILIAN_JOBS =
+  "https://job.ubpi.or.kr/job/recruit/civilianRecruit/list.ulsan?mId=001001001000000000";
+
 const jobs = [
   {
     id: 1,
@@ -61,6 +67,45 @@ export default function JobsPage() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-4">
+        {/* 울산 실시간 채용 게시판 (울산경제일자리진흥원) */}
+        <section>
+          <h2 className="text-base font-bold text-gray-900 mb-2">
+            🔴 울산 실시간 채용정보
+          </h2>
+          <div className="grid grid-cols-2 gap-3">
+            <a
+              href={PUBLIC_JOBS}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col rounded-2xl p-5 text-white shadow-md bg-gradient-to-br from-blue-600 to-indigo-700 hover:brightness-110 transition"
+            >
+              <span className="text-3xl">🏛️</span>
+              <span className="mt-2 text-lg font-bold">공공 일자리</span>
+              <span className="mt-0.5 text-xs text-blue-100">
+                관공서·공공기관 채용 →
+              </span>
+            </a>
+            <a
+              href={CIVILIAN_JOBS}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col rounded-2xl p-5 text-white shadow-md bg-gradient-to-br from-sky-500 to-blue-600 hover:brightness-110 transition"
+            >
+              <span className="text-3xl">🏢</span>
+              <span className="mt-2 text-lg font-bold">민간 일자리</span>
+              <span className="mt-0.5 text-xs text-sky-100">
+                기업·사업장 채용 →
+              </span>
+            </a>
+          </div>
+          <p className="mt-2 text-xs text-gray-400">
+            울산경제일자리진흥원 공식 채용 게시판으로 연결됩니다.
+          </p>
+        </section>
+
+        <h2 className="text-base font-bold text-gray-900 pt-2">
+          ⭐ 미드허브 추천 공고 (예시)
+        </h2>
         {jobs.map((job) => (
           <article
             key={job.id}

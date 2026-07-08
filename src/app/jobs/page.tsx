@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { supabase, type JobPost } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 // 울산경제일자리진흥원 · 워크넷 실시간 채용 게시판
 const PUBLIC_JOBS =
@@ -7,18 +10,19 @@ const CIVILIAN_JOBS =
   "https://job.ubpi.or.kr/job/recruit/civilianRecruit/list.ulsan?mId=001001001000000000";
 const WORKNET = "https://www.work.go.kr/";
 
-// 운영자 승인 후 게시되는 이웃 구인구직 글 (승인된 글을 여기에 추가)
-type NeighborPost = {
-  id: number;
-  kind: "구인" | "구직";
-  title: string;
-  region: string;
-  contact: string;
-  body: string;
-};
-const approvedPosts: NeighborPost[] = [];
+async function getApprovedPosts(): Promise<JobPost[]> {
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("job_posts")
+    .select("*")
+    .eq("status", "approved")
+    .order("created_at", { ascending: false });
+  return data ?? [];
+}
 
-export default function JobsPage() {
+export default async function JobsPage() {
+  const approvedPosts = await getApprovedPosts();
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-blue-600 text-white px-4 py-4">
@@ -74,9 +78,7 @@ export default function JobsPage() {
             <span className="text-lg font-bold">워크넷 (전국 채용정보)</span>
             <span className="text-emerald-100">→</span>
           </a>
-          <p className="mt-2 text-xs text-gray-400">
-            공식 채용 게시판으로 연결됩니다.
-          </p>
+          <p className="mt-2 text-xs text-gray-400">공식 채용 게시판으로 연결됩니다.</p>
         </section>
 
         {/* 이웃 구인구직 (운영자 승인제) */}
@@ -128,7 +130,7 @@ export default function JobsPage() {
                     <h3 className="text-base font-bold text-gray-900">{p.title}</h3>
                   </div>
                   <div className="mt-2 text-sm text-gray-600">📍 {p.region}</div>
-                  <p className="mt-1.5 text-[15px] leading-relaxed text-gray-700">
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-gray-700 whitespace-pre-wrap">
                     {p.body}
                   </p>
                   <div className="mt-3 pt-3 border-t border-gray-100 text-sm font-semibold text-gray-800">

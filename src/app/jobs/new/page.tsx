@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
-// 운영자(승인권자) 이메일 — 제출된 글은 여기로 접수되어 승인 후 게시됩니다.
+// Supabase 미설정 시 폴백: 운영자 이메일로 접수
 const ADMIN_EMAIL = "berry7877@gmail.com";
 
 export default function NewJobPost() {
@@ -13,12 +14,32 @@ export default function NewJobPost() {
   const [contact, setContact] = useState("");
   const [body, setBody] = useState("");
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   const canSubmit = title.trim() && region.trim() && contact.trim() && body.trim();
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!canSubmit) return;
+    if (!canSubmit || busy) return;
+    setBusy(true);
+    setError("");
+
+    if (supabase) {
+      const { error: err } = await supabase
+        .from("job_posts")
+        .insert({ kind, title, region, contact, body });
+      if (err) {
+        setError("등록 중 문제가 생겼어요. 잠시 후 다시 시도해주세요.");
+        setBusy(false);
+        return;
+      }
+      setSent(true);
+      setBusy(false);
+      return;
+    }
+
+    // 폴백: 메일로 접수
     const subject = `[미드허브 ${kind}] ${title}`;
     const text = [
       `구분: ${kind}`,
@@ -33,6 +54,7 @@ export default function NewJobPost() {
       subject
     )}&body=${encodeURIComponent(text)}`;
     setSent(true);
+    setBusy(false);
   }
 
   return (
@@ -58,8 +80,14 @@ export default function NewJobPost() {
             <p className="text-4xl">✅</p>
             <p className="mt-3 text-lg font-bold text-emerald-900">접수되었습니다</p>
             <p className="mt-2 text-[15px] leading-relaxed text-emerald-800">
-              메일 앱에서 <b>보내기</b>를 누르면 운영자에게 전달됩니다.
-              <br />운영자 확인 후 게시판에 올라갑니다.
+              {supabase ? (
+                <>운영자 확인(승인) 후 게시판에 올라갑니다. 조금만 기다려 주세요 🙂</>
+              ) : (
+                <>
+                  메일 앱에서 <b>보내기</b>를 누르면 운영자에게 전달됩니다.
+                  <br />운영자 확인 후 게시판에 올라갑니다.
+                </>
+              )}
             </p>
             <Link
               href="/jobs"
@@ -116,12 +144,15 @@ export default function NewJobPost() {
               부적절한 글은 게시되지 않을 수 있습니다.
             </p>
 
+            {error && (
+              <p className="text-sm font-semibold text-red-600">{error}</p>
+            )}
             <button
               type="submit"
-              disabled={!canSubmit}
+              disabled={!canSubmit || busy}
               className="w-full rounded-2xl bg-blue-600 px-5 py-4 text-lg font-bold text-white shadow-md transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300"
             >
-              운영자에게 제출하기
+              {busy ? "제출 중…" : "운영자에게 제출하기"}
             </button>
           </form>
         )}

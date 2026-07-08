@@ -43,7 +43,13 @@ export default function AiPage() {
               href="/ai/learn"
               className="rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-indigo-700"
             >
-              📚 바로 기본지식 배우기
+              📚 기본지식 배우기
+            </Link>
+            <Link
+              href="/ai/curriculum"
+              className="rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-indigo-700 ring-1 ring-indigo-200 hover:bg-indigo-50"
+            >
+              📋 수업 커리큘럼 보기
             </Link>
           </div>
         </section>

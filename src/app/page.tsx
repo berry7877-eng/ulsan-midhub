@@ -67,12 +67,12 @@ export default function Home() {
             href="/life"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-red-500 hover:brightness-110 transition"
           >
-            <span className="text-5xl">🎉</span>
+            <span className="text-5xl">🌿</span>
             <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
               두번째 인생 즐기기
             </h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
-              수다 · 운세로 활력 충전 →
+              건강정보 · 사주로 리프레시 →
             </p>
           </a>
 

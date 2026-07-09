@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-export type TodayPost = {
+export type Post = {
   slug: string;
   title: string;
   date: string;
@@ -10,9 +10,7 @@ export type TodayPost = {
   body: string;
 };
 
-const DIR = path.join(process.cwd(), "content", "today");
-
-function parse(raw: string, slug: string): TodayPost {
+function parse(raw: string, slug: string): Post {
   const m = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
   const fm: Record<string, string> = {};
   let body = raw;
@@ -22,7 +20,13 @@ function parse(raw: string, slug: string): TodayPost {
       if (idx > 0) {
         const key = line.slice(0, idx).trim();
         let val = line.slice(idx + 1).trim();
-        val = val.replace(/^["']|["']$/g, "");
+        // 앞뒤가 같은 따옴표로 감싸진 경우에만 제거 (제목 안 따옴표 보존)
+        if (
+          (val.startsWith('"') && val.endsWith('"') && val.length > 1) ||
+          (val.startsWith("'") && val.endsWith("'") && val.length > 1)
+        ) {
+          val = val.slice(1, -1);
+        }
         fm[key] = val;
       }
     }
@@ -30,7 +34,7 @@ function parse(raw: string, slug: string): TodayPost {
   }
   return {
     slug,
-    title: fm.title || "오늘의 정보",
+    title: fm.title || "정보",
     date: fm.date || "",
     emoji: fm.emoji || "📰",
     topic: fm.topic || "",
@@ -38,15 +42,12 @@ function parse(raw: string, slug: string): TodayPost {
   };
 }
 
-export function getTodayPosts(): TodayPost[] {
-  if (!fs.existsSync(DIR)) return [];
+export function getPosts(sub: string): Post[] {
+  const dir = path.join(process.cwd(), "content", sub);
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(DIR)
+    .readdirSync(dir)
     .filter((f) => f.endsWith(".md"))
-    .map((f) => parse(fs.readFileSync(path.join(DIR, f), "utf8"), f.replace(/\.md$/, "")))
+    .map((f) => parse(fs.readFileSync(path.join(dir, f), "utf8"), f.replace(/\.md$/, "")))
     .sort((a, b) => b.date.localeCompare(a.date));
-}
-
-export function getLatestPost(): TodayPost | null {
-  return getTodayPosts()[0] ?? null;
 }

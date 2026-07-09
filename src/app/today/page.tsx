@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTodayPosts } from "@/lib/today";
+import { getPosts } from "@/lib/posts";
 import PostBody from "./PostBody";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default function TodayPage() {
-  const posts = getTodayPosts();
+  const posts = getPosts("today");
 
   return (
     <div className="min-h-screen bg-gray-50">

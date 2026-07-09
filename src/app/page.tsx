@@ -64,9 +64,7 @@ export default function Home() {
 
           {/* 2. 두번째 인생 즐기기 */}
           <a
-            href={MOIM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/life"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-red-500 hover:brightness-110 transition"
           >
             <span className="text-5xl">🎉</span>

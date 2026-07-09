@@ -42,7 +42,7 @@ export default function Home() {
           <MidHubLogo />
           <div>
             <h1 className="text-xl font-bold text-gray-900">울산 미드허브</h1>
-            <p className="text-sm text-gray-500">중장년을 위한 AI · 정책 · 취업 · 모임</p>
+            <p className="text-sm text-gray-500">중장년을 위한 AI · 건강 · 미래 · 오늘</p>
           </div>
         </div>
       </header>
@@ -62,41 +62,39 @@ export default function Home() {
             </p>
           </a>
 
-          {/* 2. 두번째 인생 즐기기 */}
+          {/* 2. 건강 */}
           <a
-            href="/life"
-            className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-red-500 hover:brightness-110 transition"
+            href="/life/health"
+            className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-teal-500 to-emerald-600 hover:brightness-110 transition"
           >
-            <span className="text-5xl">🌿</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
-              두번째 인생 즐기기
-            </h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
-              건강정보 · 사주로 리프레시 →
-            </p>
-          </a>
-
-          {/* 3. 혜택 */}
-          <a
-            href="/benefits"
-            className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-green-700 hover:brightness-110 transition"
-          >
-            <span className="text-5xl">🎁</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">혜택</h2>
+            <span className="text-5xl">💪</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">건강</h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
-              정책 · 교육 지원정보 →
+              매일 새로워지는 건강 습관 →
             </p>
           </a>
 
-          {/* 4. 취업 */}
+          {/* 3. 미래 */}
           <a
-            href="/jobs"
+            href="/future"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-sky-500 to-blue-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">💼</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">취업</h2>
+            <span className="text-5xl">🧭</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">미래</h2>
             <p className="mt-1.5 text-[15px] font-medium leading-snug text-sky-50">
-              워크넷 · 울산일자리 →
+              교육 · 취업 · 정책 →
+            </p>
+          </a>
+
+          {/* 4. 오늘 */}
+          <a
+            href="/life"
+            className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-amber-500 hover:brightness-110 transition"
+          >
+            <span className="text-5xl">☀️</span>
+            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">오늘</h2>
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
+              사주 · 오늘의 추천 →
             </p>
           </a>
         </div>

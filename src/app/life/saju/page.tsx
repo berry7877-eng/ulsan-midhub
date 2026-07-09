@@ -3,7 +3,7 @@ import { computeSaju, SI_LABELS } from "@/lib/saju";
 
 export const metadata = {
   title: "사주팔자 — 울산 미드허브",
-  description: "생년월일시로 내 사주팔자와 오행, 타고난 성향을 풀어봅니다. 재미·참고용.",
+  description: "생년월일시로 내 사주팔자와 오행, 타고난 성향과 조언을 풀어봅니다. 재미·참고용.",
 };
 
 export const dynamic = "force-dynamic";
@@ -16,6 +16,9 @@ const ELEM_COLOR: Record<string, { bg: string; text: string; bar: string }> = {
   수: { bg: "bg-blue-100", text: "text-blue-700", bar: "bg-blue-500" },
 };
 
+const inputCls =
+  "rounded-xl border border-gray-300 bg-white px-3 py-3 text-base text-gray-900 placeholder-gray-400 focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200";
+
 export default async function SajuPage({
   searchParams,
 }: {
@@ -25,11 +28,10 @@ export default async function SajuPage({
   const y = parseInt(sp.y ?? "", 10);
   const m = parseInt(sp.m ?? "", 10);
   const d = parseInt(sp.d ?? "", 10);
-  const siRaw = sp.si ?? "";
-  const si = siRaw === "" ? -1 : parseInt(siRaw, 10);
+  const si = (sp.si ?? "") === "" ? -1 : parseInt(sp.si, 10);
+  const isLunar = sp.cal === "lunar";
   const valid = y >= 1930 && y <= 2020 && m >= 1 && m <= 12 && d >= 1 && d <= 31;
-  const result = valid ? computeSaju(y, m, d, si) : null;
-
+  const result = valid ? computeSaju(y, m, d, si, isLunar) : null;
   const total = result ? result.pillars.length * 2 : 8;
 
   return (
@@ -40,26 +42,43 @@ export default async function SajuPage({
             href="/life"
             className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-lg font-extrabold text-purple-700 shadow-md hover:bg-purple-50 transition-colors"
           >
-            ← 즐기기 홈
+            ← 오늘
           </Link>
           <h1 className="mt-4 text-2xl font-extrabold">🔮 사주팔자</h1>
-          <p className="mt-1 text-sm text-violet-100">
-            생년월일시로 타고난 기운과 성향을 풀어봐요
-          </p>
+          <p className="mt-1 text-sm text-violet-100">타고난 기운과 성향을 풀어봐요</p>
         </div>
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-5">
         {/* 입력 폼 */}
         <form method="get" className="bg-white rounded-2xl border border-gray-200 p-5">
-          <p className="text-sm font-bold text-gray-800 mb-2">생년월일 (양력)</p>
+          <div className="flex gap-2 mb-4">
+            {[
+              { v: "solar", label: "양력 생일" },
+              { v: "lunar", label: "음력 생일" },
+            ].map((o) => {
+              const on = (sp.cal ?? "solar") === o.v;
+              return (
+                <label
+                  key={o.v}
+                  className={`flex-1 cursor-pointer rounded-xl px-4 py-2.5 text-center text-sm font-bold ${
+                    on ? "bg-violet-600 text-white" : "bg-gray-50 text-gray-600 ring-1 ring-gray-200"
+                  }`}
+                >
+                  <input type="radio" name="cal" value={o.v} defaultChecked={on} className="hidden" />
+                  {o.label}
+                </label>
+              );
+            })}
+          </div>
+          <p className="text-sm font-bold text-gray-800 mb-2">생년월일</p>
           <div className="grid grid-cols-3 gap-2">
-            <input name="y" defaultValue={sp.y} inputMode="numeric" placeholder="년(1968)" className="rounded-xl border border-gray-300 px-3 py-3 text-base focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200" />
-            <input name="m" defaultValue={sp.m} inputMode="numeric" placeholder="월(5)" className="rounded-xl border border-gray-300 px-3 py-3 text-base focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200" />
-            <input name="d" defaultValue={sp.d} inputMode="numeric" placeholder="일(15)" className="rounded-xl border border-gray-300 px-3 py-3 text-base focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200" />
+            <input name="y" defaultValue={sp.y} inputMode="numeric" placeholder="년(1968)" className={inputCls} />
+            <input name="m" defaultValue={sp.m} inputMode="numeric" placeholder="월(5)" className={inputCls} />
+            <input name="d" defaultValue={sp.d} inputMode="numeric" placeholder="일(15)" className={inputCls} />
           </div>
           <p className="text-sm font-bold text-gray-800 mt-4 mb-2">태어난 시 (모르면 비워두세요)</p>
-          <select name="si" defaultValue={sp.si ?? ""} className="w-full rounded-xl border border-gray-300 px-3 py-3 text-base bg-white focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-200">
+          <select name="si" defaultValue={sp.si ?? ""} className={`w-full ${inputCls}`}>
             <option value="">모름</option>
             {SI_LABELS.map((s, i) => (
               <option key={i} value={i}>
@@ -76,10 +95,16 @@ export default async function SajuPage({
           <>
             {/* 사주팔자 */}
             <section className="bg-white rounded-2xl border border-gray-200 p-5">
-              <h2 className="text-base font-extrabold text-gray-900 mb-1">
+              <h2 className="text-base font-extrabold text-gray-900">
                 내 사주팔자 <span className="text-sm font-medium text-gray-400">({result.ttiName}띠)</span>
               </h2>
-              <p className="text-xs text-gray-400 mb-3">일간(나)은 <b className="text-violet-700">{result.ilgan}</b>, 파란 테두리가 '나'예요.</p>
+              <p className="text-xs text-gray-400 mb-3">
+                {result.isLunar
+                  ? `음력 ${y}.${m}.${d} → 양력 ${result.solar.year}.${result.solar.month}.${result.solar.day} 기준`
+                  : `양력 ${y}.${m}.${d} 기준`}
+                {" · 일간(나): "}
+                <b className="text-violet-700">{result.ilgan}</b>
+              </p>
               <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${result.pillars.length}, minmax(0,1fr))` }}>
                 {result.pillars.map((p) => {
                   const isDay = p.label === "일주";
@@ -92,19 +117,37 @@ export default async function SajuPage({
                   );
                 })}
               </div>
-              {!result.hasHour && (
-                <p className="mt-2 text-xs text-gray-400">※ 태어난 시를 넣으면 시주까지 4기둥으로 봐드려요.</p>
-              )}
+              {!result.hasHour && <p className="mt-2 text-xs text-gray-400">※ 태어난 시를 넣으면 시주까지 4기둥으로 봐드려요.</p>}
             </section>
 
-            {/* 일간 성향 */}
+            {/* 타고난 성향 */}
             <section className="rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 p-5 text-white">
-              <p className="text-sm font-semibold text-violet-100">타고난 성향 · 일간 {result.ilgan}({result.ilganDesc.elem})</p>
-              <p className="mt-1 text-xl font-extrabold">{result.ilganDesc.short} 같은 사람</p>
-              <p className="mt-2 text-[15px] leading-relaxed text-violet-50">{result.ilganDesc.desc}</p>
+              <p className="text-sm font-semibold text-violet-100">일간 {result.ilgan} · {result.ilgan_info.elem}</p>
+              <p className="mt-1 text-xl font-extrabold">{result.ilgan_info.nature} 같은 사람</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {result.ilgan_info.keywords.map((k) => (
+                  <span key={k} className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold">#{k}</span>
+                ))}
+              </div>
             </section>
 
-            {/* 오행 분포 */}
+            {/* 강점 / 조심 / 조언 */}
+            <section className="space-y-3">
+              <div className="bg-white rounded-2xl border border-gray-200 p-5">
+                <p className="text-sm font-extrabold text-emerald-600">💚 타고난 강점</p>
+                <p className="mt-1 text-[15px] leading-relaxed text-gray-700">{result.ilgan_info.strength}</p>
+              </div>
+              <div className="bg-white rounded-2xl border border-gray-200 p-5">
+                <p className="text-sm font-extrabold text-amber-600">⚖️ 이런 점은 살짝 조심</p>
+                <p className="mt-1 text-[15px] leading-relaxed text-gray-700">{result.ilgan_info.caution}</p>
+              </div>
+              <div className="bg-white rounded-2xl border border-gray-200 p-5">
+                <p className="text-sm font-extrabold text-violet-600">✨ 오늘의 한마디</p>
+                <p className="mt-1 text-[15px] leading-relaxed text-gray-700">{result.ilgan_info.advice}</p>
+              </div>
+            </section>
+
+            {/* 오행 균형 */}
             <section className="bg-white rounded-2xl border border-gray-200 p-5">
               <h2 className="text-base font-extrabold text-gray-900 mb-3">오행(五行) 균형</h2>
               <div className="space-y-2">
@@ -118,16 +161,31 @@ export default async function SajuPage({
                   </div>
                 ))}
               </div>
-              <div className="mt-4 rounded-xl bg-violet-50 p-4 text-[15px] leading-relaxed text-violet-900">
-                <p><b>강한 기운</b>: {result.strong} · <b>약한 기운</b>: {result.weak}</p>
-                <p className="mt-1">{result.balanceMsg}</p>
+              <div className="mt-4 space-y-2">
+                <div className="rounded-xl bg-violet-50 p-4 text-[15px] leading-relaxed text-violet-900">
+                  <b>강한 기운 · {result.strong}</b> — {result.strongMsg}
+                </div>
+                <div className="rounded-xl bg-gray-50 p-4 text-[15px] leading-relaxed text-gray-700">
+                  <b>채우면 좋은 · {result.weak}</b> — {result.weakMsg}
+                </div>
               </div>
             </section>
 
-            <p className="text-center text-xs text-gray-400">
-              전통 명리(命理) 방식으로 계산했지만, 재미·참고용이에요 🙂 큰 결정은 신중히.
+            {/* 마무리 */}
+            <section className="rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-5 text-white text-center">
+              <p className="text-[15px] font-medium leading-relaxed">{result.closing}</p>
+            </section>
+
+            <p className="text-center text-xs text-gray-400 leading-relaxed">
+              전통 명리(命理) 방식(절기 기준)으로 계산했어요. 정해진 운명이 아니라 나를 이해하는 참고 자료로 봐주세요 🙂
             </p>
           </>
+        )}
+
+        {!result && (
+          <p className="text-center text-xs text-gray-400 leading-relaxed">
+            사주는 24절기(양력) 기준이에요. 음력 생일만 아시면 위에서 &apos;음력 생일&apos;을 선택하면 자동으로 맞춰 계산해드려요.
+          </p>
         )}
       </main>
     </div>

@@ -50,14 +50,13 @@ export default function Home() {
       <main className="max-w-2xl mx-auto px-4 py-6">
         {/* 4분할 타일: AI로 날개달기 · 두번째 인생 · 혜택 · 취업 */}
         <div className="grid grid-cols-2 gap-4">
-          {/* 1. AI로 날개달기 */}
+          {/* 1. AI */}
           <a
             href="/ai"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl font-black tracking-tight">AI</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">AI로 날개달기</h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-violet-100">
+            <h2 className="text-4xl font-black tracking-tight">AI</h2>
+            <p className="mt-auto pt-3 text-[15px] font-medium leading-snug text-violet-100">
               경험에 AI를 더해 날아오르기 →
             </p>
           </a>
@@ -67,9 +66,8 @@ export default function Home() {
             href="/life/health"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-teal-500 to-emerald-600 hover:brightness-110 transition"
           >
-            <span className="text-5xl">💪</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">건강</h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
+            <h2 className="text-4xl font-black tracking-tight">건강</h2>
+            <p className="mt-auto pt-3 text-[15px] font-medium leading-snug text-emerald-50">
               매일 새로워지는 건강 습관 →
             </p>
           </a>
@@ -79,9 +77,8 @@ export default function Home() {
             href="/future"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-sky-500 to-blue-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">🧭</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">미래</h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-sky-50">
+            <h2 className="text-4xl font-black tracking-tight">미래</h2>
+            <p className="mt-auto pt-3 text-[15px] font-medium leading-snug text-sky-50">
               교육 · 취업 · 정책 →
             </p>
           </a>
@@ -91,9 +88,8 @@ export default function Home() {
             href="/life"
             className="flex flex-col min-h-[210px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-orange-500 to-amber-500 hover:brightness-110 transition"
           >
-            <span className="text-5xl">☀️</span>
-            <h2 className="mt-auto text-2xl font-extrabold tracking-tight">오늘</h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-orange-50">
+            <h2 className="text-4xl font-black tracking-tight">오늘</h2>
+            <p className="mt-auto pt-3 text-[15px] font-medium leading-snug text-orange-50">
               사주 · 오늘의 추천 →
             </p>
           </a>

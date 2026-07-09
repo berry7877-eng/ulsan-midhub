@@ -64,7 +64,7 @@ export default function LearnPage() {
           >
             ← AI 홈
           </Link>
-          <h1 className="mt-4 text-2xl font-extrabold">📚 AI 기본지식 배우기</h1>
+          <h1 className="mt-4 text-2xl font-extrabold">📚 AI 알아보기</h1>
           <p className="mt-1 text-sm text-indigo-100">
             처음이어도 괜찮아요. 딱 필요한 것만 쉽게 정리했습니다.
           </p>

@@ -30,17 +30,17 @@ export default function AiPage() {
       <main className="max-w-2xl mx-auto px-4 py-6">
         {/* 4분할 타일 */}
         <div className="grid grid-cols-2 gap-4">
-          {/* 1. AI 이해도 진단 */}
+          {/* 1. AI 알아보기 */}
           <Link
-            href="/ai/diagnosis"
-            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
+            href="/ai/learn"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-teal-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">📝</span>
+            <span className="text-5xl">📚</span>
             <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
-              AI 이해도 진단
+              AI 알아보기
             </h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-violet-100">
-              20문항으로 내 수준 확인 →
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
+              AI 첫걸음, 쉽게 정리 →
             </p>
           </Link>
 
@@ -58,17 +58,17 @@ export default function AiPage() {
             </p>
           </Link>
 
-          {/* 3. 기본지식 배우기 */}
+          {/* 3. AI 이해도 진단 */}
           <Link
-            href="/ai/learn"
-            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-emerald-500 to-teal-700 hover:brightness-110 transition"
+            href="/ai/diagnosis"
+            className="flex flex-col min-h-[200px] rounded-3xl p-6 text-white shadow-lg ring-1 ring-black/5 bg-gradient-to-br from-violet-600 to-indigo-700 hover:brightness-110 transition"
           >
-            <span className="text-5xl">📚</span>
+            <span className="text-5xl">📝</span>
             <h2 className="mt-auto text-2xl font-extrabold tracking-tight leading-tight">
-              기본지식 배우기
+              AI 이해도 진단
             </h2>
-            <p className="mt-1.5 text-[15px] font-medium leading-snug text-emerald-50">
-              AI 첫걸음, 쉽게 정리 →
+            <p className="mt-1.5 text-[15px] font-medium leading-snug text-violet-100">
+              20문항으로 내 수준 확인 →
             </p>
           </Link>
 

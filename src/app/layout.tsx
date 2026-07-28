@@ -27,6 +27,14 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
   },
+  // 검색엔진 소유확인 토큰 — 각 서비스에 사이트를 등록할 때 요구한다.
+  // 공개되어도 되는 값이다(HTML 에 노출되는 것이 목적). 지우면 등록이 해제될 수 있으니 유지할 것.
+  verification: {
+    other: {
+      // 네이버 서치어드바이저 (중장년 타깃에는 구글보다 중요 — 네이버는 자동 수집이 소극적이라 등록 필수)
+      "naver-site-verification": "b9bb89fcee18665ac90cf943b20bdd70f24c32b6",
+    },
+  },
 };
 
 export default function RootLayout({

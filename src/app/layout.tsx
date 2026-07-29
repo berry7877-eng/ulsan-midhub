@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   // 검색엔진 소유확인 토큰 — 각 서비스에 사이트를 등록할 때 요구한다.
   // 공개되어도 되는 값이다(HTML 에 노출되는 것이 목적). 지우면 등록이 해제될 수 있으니 유지할 것.
   verification: {
+    // 구글 서치콘솔 — 유입 자체는 네이버가 크겠지만, 구글은 '어떤 검색어로 들어왔는지'를
+    // 알려준다. 그 데이터로 글 주제를 정하려고 등록했다.
+    google: "VaY1NodV3dinzEFrNE_AeM0xcMWKmcbHUJ2sfJHs27g",
     other: {
       // 네이버 서치어드바이저 (중장년 타깃에는 구글보다 중요 — 네이버는 자동 수집이 소극적이라 등록 필수)
       "naver-site-verification": "b9bb89fcee18665ac90cf943b20bdd70f24c32b6",
